@@ -17,7 +17,7 @@ local function set_bot_photo(msg, success, result)
     os.rename(result, file)
     print('File moved to:', file)
     set_profile_photo(file, ok_cb, false)
-    send_large_msg(receiver, 'Photo changed!', ok_cb, false)
+    send_large_msg(receiver, 'عکس عوض شد 🔴', ok_cb, false)
     redis:del("bot:photo")
   else
     print('Error downloading: '..msg.id)
@@ -176,9 +176,9 @@ local function run(msg,matches)
       		end
       	end
     end
-    if matches[1] == "setbotphoto" then
+    if matches[1] == "تغییر عکس ربات" then
     	redis:set("bot:photo", "waiting")
-    	return reply_msg(msg.id, '> Please send me bot photo now', ok_cb, false)
+    	return reply_msg(msg.id, '> ی عکس خوشگل برام انتخاب کن 🚨', ok_cb, false)
     end
     if matches[1] == "markread" then
     	if matches[2] == "on" then
@@ -197,10 +197,10 @@ local function run(msg,matches)
     	return reply_msg(msg.id, "Message has been sent", ok_cb, false)
     end
     
-    if matches[1] == "import" then--join by group link
+    if matches[1] == "عضویت" then--join by group link
     	local hash = parsed_url(matches[2])
     	import_chat_link(hash,ok_cb,false)
-		return reply_msg(msg.id, "Done!", ok_cb, false)
+		return reply_msg(msg.id, "اومدم 🚄", ok_cb, false)
     end
     if matches[1] == "contactlist" then
 	    if not is_sudo(msg) then-- Sudo only
@@ -275,7 +275,7 @@ end
 return {
   patterns = {
 	"^[#!/](pm) (%d+) (.*)$",
-	"^[#!/](import) (.*)$",
+	"^[#!/](عضویت) (.*)$",
 	"^[#!/](markread) (on)$",
 	"^[#!/](markread) (off)$",
 	"^[#!/](setbotphoto)$",
@@ -288,10 +288,10 @@ return {
 	"^[#/!](addlog)$",
 	"^[#/!](remlog)$",
 	"^([Pp]m) (%d+) (.*)$",
-	"^([Ii]mport) (.*)$",
+	"^(عضویت) (.*)$",
 	"^([Mm]arkread) (on)$",
 	"^([Mm]arkread) (off)$",
-	"^([Ss]etbotphoto)$",
+	"^(تغییر عکس ربات)$",
 	"^([Cc]ontactlist)$",
 	"^([Dd]ialoglist)$",
 	"^([Ss]endcontact) (.*) (.*) (.*)$",
